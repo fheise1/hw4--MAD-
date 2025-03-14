@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -30,12 +31,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<String> images = [
+    'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D',
+    'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'
+  ];
+  List<bool> flipped = List.filled(16, false);
+  List<int> selectedIndexes = [];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    images.shuffle(Random());
   }
 
   @override
