@@ -44,6 +44,27 @@ class _MyHomePageState extends State<MyHomePage> {
     images.shuffle(Random());
   }
 
+  void flipCard(int index) {
+    if (selectedIndexes.length < 2 && !flipped[index]) {
+      setState(() {
+        flipped[index] = true;
+        selectedIndexes.add(index);
+      });
+
+      if (selectedIndexes.length == 2) {
+        Future.delayed(const Duration(seconds: 1), () {
+          setState(() {
+            if (images[selectedIndexes[0]] != images[selectedIndexes[1]]) {
+              flipped[selectedIndexes[0]] = false;
+              flipped[selectedIndexes[1]] = false;
+            }
+            selectedIndexes.clear();
+          });
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
